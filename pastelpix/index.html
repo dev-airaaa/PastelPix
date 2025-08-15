@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" src="style.css">
+<title>PastelPix — Stable</title>
+
+</style>
+</head>
+<body>
+  <!-- Splash -->
+  <div id="splash" aria-hidden="true">
+    <div class="splash-card">
+      <div class="spinner"></div>
+      <div style="font-weight:700; font-size:18px; margin-bottom:6px;">PastelPix</div>
+      <div class="tiny">loading your cozy canvas…</div>
+    </div>
+  </div>
+
+  <div class="app" id="app" aria-hidden="true">
+    <header class="topbar">
+      <div class="brand"><div class="dot"></div><b>PastelPix</b><span class="chip">Stable</span></div>
+      <div class="grow"></div>
+      <button id="btn-new" class="btn">New</button>
+      <button id="btn-export" class="btn pink">Export PNG</button>
+    </header>
+
+    <div class="row">
+      <!-- Left: Tools -->
+      <section class="panel" style="overflow:auto">
+        <h3>Tools</h3>
+        <div class="toolbar" id="tools">
+          <button class="tool" data-tool="brush" title="Brush (B)">
+            <div class="ico">🖌️</div><div class="name">Brush</div><span class="chip">B</span>
+          </button>
+          <button class="tool" data-tool="eraser" title="Eraser (E)">
+            <div class="ico">🧼</div><div class="name">Eraser</div><span class="chip">E</span>
+          </button>
+          <button class="tool" data-tool="fill" title="Fill (F)">
+            <div class="ico">🪣</div><div class="name">Fill</div><span class="chip">F</span>
+          </button>
+          <button class="tool" data-tool="line" title="Line (L)">
+            <div class="ico">／</div><div class="name">Line</div><span class="chip">L</span>
+          </button>
+          <button class="tool" data-tool="rect" title="Rectangle (R)">
+            <div class="ico">▦</div><div class="name">Rect</div><span class="chip">R</span>
+          </button>
+          <button class="tool" data-tool="circle" title="Circle (C)">
+            <div class="ico">🟠</div><div class="name">Circle</div><span class="chip">C</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Center: Stage -->
+      <section class="panel stage" id="stage">
+        <div class="hint">Space + drag to pan · Scroll to zoom</div>
+        <div class="canvas-shell">
+          <div id="wrap" class="canvas-wrap">
+            <canvas id="pixel"></canvas>
+            <canvas id="overlay"></canvas>
+            <canvas id="grid"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right: Controls -->
+      <section class="panel">
+        <h3>Controls</h3>
+        <div class="controls">
+          <div class="row2">
+            <label class="tiny" style="width:80px;">Canvas</label>
+            <input id="inp-w" class="field" type="number" min="4" max="256" step="1" value="32" style="width:84px">
+            <span class="tiny">×</span>
+            <input id="inp-h" class="field" type="number" min="4" max="256" step="1" value="32" style="width:84px">
+            <button id="btn-resize" class="btn">Resize</button>
+          </div>
+
+          <div class="row2">
+            <label class="tiny" style="width:80px;">Color</label>
+            <input id="color" type="color" value="#ff66a3">
+            <div id="swatch" class="badge" style="min-width:80px; text-align:center;">#ff66a3</div>
+          </div>
+
+          <div class="row2">
+            <label class="tiny" style="width:80px;">Brush</label>
+            <input id="brush" type="range" min="1" max="6" step="1" value="1" />
+            <div class="badge" id="brushLabel">1 px</div>
+          </div>
+
+          <div class="row2">
+            <label class="tiny" style="width:80px;">Grid</label>
+            <input id="gridToggle" type="checkbox" checked>
+            <div class="tiny">show</div>
+            <div class="grow"></div>
+            <label class="tiny">Opacity</label>
+            <input id="gridAlpha" type="range" min="0" max="1" step="0.05" value="0.25" />
+          </div>
+
+          <div class="row2">
+            <label class="tiny" style="width:80px;">Export scale</label>
+            <input id="exportScale" class="field" type="number" min="1" max="64" step="1" value="8" style="width:84px">
+            <div class="tiny">×</div>
+            <div class="grow"></div>
+            <button id="btn-clear" class="btn">Clear</button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <footer class="bottombar">
+      <div class="badge" id="status">Ready</div>
+      <div class="grow"></div>
+      <div class="badge" id="zoomBadge">100%</div>
+      <div class="badge" id="posBadge">–</div>
+    </footer>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast" aria-live="polite">💗 Saved!</div>
+
+<script src="script.js"></script>
+</body>
+</html>

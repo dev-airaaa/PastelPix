@@ -1,0 +1,402 @@
+:root {
+    --bg: #0f0f14;
+    --glass: rgba(255, 255, 255, .10);
+    --glass-2: rgba(255, 255, 255, .16);
+    --border: rgba(255, 255, 255, .22);
+    --txt: #f7f7fb;
+
+    /* pastel accents */
+    --pink: #ffb3d9;
+    --pink-2: #ffc7e5;
+    --mint: #b3ffe1;
+    --lilac: #cdbaff;
+    --lemon: #fff0a6;
+
+    --radius: 16px;
+    --shadow: 0 10px 30px rgba(0, 0, 0, .35);
+}
+
+* {
+    box-sizing: border-box
+}
+
+html,
+body {
+    height: 100%
+}
+
+body {
+    margin: 0;
+    color: var(--txt);
+    background:
+        radial-gradient(1200px 800px at -10% -10%, #1b1431 0%, transparent 60%),
+        radial-gradient(900px 700px at 110% 10%, #142b2f 0%, transparent 60%),
+        radial-gradient(900px 700px at 50% 120%, #311428 0%, transparent 60%),
+        #0c0c11;
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    overflow: hidden;
+}
+
+/* Splash */
+#splash {
+    position: fixed;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    z-index: 9999;
+    background: rgba(14, 14, 20, .85);
+    backdrop-filter: blur(10px);
+    transition: opacity .45s ease, visibility .45s ease;
+}
+
+#splash.hidden {
+    opacity: 0;
+    visibility: hidden
+}
+
+.splash-card {
+    background: linear-gradient(180deg, rgba(255, 255, 255, .12), rgba(255, 255, 255, .06));
+    border: 1px solid var(--border);
+    padding: 28px 28px 24px;
+    border-radius: 24px;
+    box-shadow: var(--shadow);
+    text-align: center;
+}
+
+.spinner {
+    width: 52px;
+    height: 52px;
+    border-radius: 999px;
+    border: 4px solid var(--pink-2);
+    border-top-color: transparent;
+    margin: 0 auto 16px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg)
+    }
+}
+
+/* App layout */
+.app {
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 64px 1fr 80px;
+    gap: 10px;
+    padding: 12px;
+    min-width: 880px;
+}
+
+header.topbar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, .15), rgba(255, 255, 255, .07));
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 10px 12px;
+    box-shadow: var(--shadow);
+    min-width: 0;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, .08);
+    white-space: nowrap;
+}
+
+.brand .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 999px;
+    background: var(--pink)
+}
+
+.brand b {
+    letter-spacing: .3px
+}
+
+.row {
+    display: grid;
+    grid-template-columns: 240px 1fr 300px;
+    gap: 12px;
+    min-height: 0;
+    min-width: 0;
+}
+
+.panel {
+    background: linear-gradient(180deg, rgba(255, 255, 255, .12), rgba(255, 255, 255, .06));
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 0;
+    box-shadow: var(--shadow);
+    min-width: 0;
+}
+
+.panel h3 {
+    margin: 4px 4px 6px;
+    font-weight: 700;
+    font-size: 14px;
+    opacity: .9
+}
+
+/* Toolbar (fixed width, scrolls if needed) */
+.toolbar {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 4px;
+    overflow: auto;
+}
+
+.tool {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: flex-start;
+    padding: 10px 12px;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, .07);
+    cursor: pointer;
+    user-select: none;
+    transition: background .15s ease, border-color .15s ease, box-shadow .15s ease;
+    will-change: background;
+    min-width: 0;
+}
+
+.tool:hover {
+    background: rgba(255, 255, 255, .1)
+}
+
+.tool.active {
+    border-color: #fff;
+    box-shadow: 0 0 0 3px rgba(255, 179, 217, .18) inset;
+    background: linear-gradient(180deg, rgba(255, 179, 217, .35), rgba(255, 255, 255, .07));
+}
+
+.tool .ico {
+    width: 28px;
+    height: 28px;
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, .12);
+    flex: 0 0 auto
+}
+
+.tool .name {
+    font-size: 13px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: white;
+}
+
+.chip {
+    font-size: 11px;
+    opacity: .75;
+    margin-left: auto;
+    padding: 2px 6px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, .25);
+    border: 1px solid rgba(255, 255, 255, .2);
+    flex: 0 0 auto;
+    color: white;
+}
+
+/* Canvas area (always centered) */
+.stage {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: linear-gradient(180deg, rgba(255, 255, 255, .08), rgba(255, 255, 255, .04));
+    min-width: 0;
+}
+
+.canvas-shell {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    /* ensures centering space */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.canvas-wrap {
+    position: relative;
+    transform-origin: 0 0;
+    /* we control origin math; stable zoom */
+    box-shadow: 0 12px 40px rgba(0, 0, 0, .45);
+    border-radius: 10px;
+    overflow: visible;
+    will-change: transform;
+}
+
+canvas {
+    image-rendering: pixelated;
+    display: block
+}
+
+#pixel {
+    background: #ffffff
+}
+
+#overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: auto
+}
+
+#grid {
+    position: absolute;
+    inset: 0;
+    pointer-events: none
+}
+
+.hint {
+    position: absolute;
+    right: 14px;
+    top: 14px;
+    font-size: 12px;
+    opacity: .8;
+    background: rgba(0, 0, 0, .35);
+    border: 1px solid rgba(255, 255, 255, .22);
+    padding: 6px 8px;
+    border-radius: 10px;
+    user-select: none;
+}
+
+/* Right panel */
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow: auto
+}
+
+.row2 {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    min-width: 0
+}
+
+.btn,
+.select,
+.field {
+    padding: 10px 12px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, .08);
+    border: 1px solid var(--border);
+    color: var(--txt);
+    font-size: 13px;
+    min-width: 0;
+}
+
+.btn {
+    cursor: pointer;
+    text-align: center;
+    user-select: none;
+    transition: background .15s ease
+}
+
+.btn:hover {
+    background: rgba(255, 255, 255, .12)
+}
+
+.btn.pink {
+    background: linear-gradient(180deg, rgba(255, 179, 217, .35), rgba(255, 255, 255, .07));
+    border-color: #fff
+}
+
+input[type="range"] {
+    width: 100%
+}
+
+input[type="color"] {
+    appearance: none;
+    width: 38px;
+    height: 32px;
+    padding: 0;
+    border: none;
+    background: transparent
+}
+
+input[type="color"]::-webkit-color-swatch {
+    border: 1px solid var(--border);
+    border-radius: 8px
+}
+
+.tiny {
+    font-size: 11px;
+    opacity: .85
+}
+
+/* Bottombar */
+.bottombar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, .15), rgba(255, 255, 255, .07));
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    min-width: 0;
+}
+
+.badge {
+    padding: 6px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, .08);
+    font-size: 12px;
+    white-space: nowrap
+}
+
+.grow {
+    flex: 1
+}
+
+/* Toast */
+.toast {
+    position: fixed;
+    left: 50%;
+    bottom: 18px;
+    transform: translateX(-50%);
+    background: linear-gradient(180deg, rgba(255, 179, 217, .95), rgba(255, 179, 217, .75));
+    color: #4a2740;
+    border: 1px solid #fff;
+    padding: 8px 12px;
+    border-radius: 999px;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, .35);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .25s ease, transform .25s ease;
+    z-index: 999;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-4px)
+}
